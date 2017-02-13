@@ -6,6 +6,7 @@ app.controller('Controller', [ 'Service', '$scope', '$constants', function(Servi
     var _clearFields = function() {
     	$scope.fieldName = '';
     	$scope.fieldType = '';
+    	$scope.notNull = false;
     };
     
     $scope.addNewModel = function() {
@@ -23,7 +24,8 @@ app.controller('Controller', [ 'Service', '$scope', '$constants', function(Servi
     $scope.addType = function() {
     	var field = {
     		fieldName : $scope.fieldName,
-    		fieldType : $scope.fieldType
+    		fieldType : $scope.fieldType,
+    		notNull : $scope.notNull
     	}
     	$scope.fields.push(field);
     	_clearFields();

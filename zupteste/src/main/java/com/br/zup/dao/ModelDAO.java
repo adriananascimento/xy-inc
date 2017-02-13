@@ -12,11 +12,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import com.br.zup.dto.FieldDTO;
 import com.br.zup.dto.ModelDTO;
 
+/**
+ * DAO of Model.
+ * @author adriana.nascimento
+ *
+ */
 public class ModelDAO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 606928056037320676L;
 	
 	@PersistenceContext
@@ -33,11 +35,16 @@ public class ModelDAO implements Serializable {
 		super();
 	}
 
+	/**
+	 * Create a new model.
+	 * @param modelDTO
+	 */
 	public void createNewModel( ModelDTO modelDTO ) {
 		StringBuilder createTableQuery = new StringBuilder("CREATE TABLE IF NOT EXISTS " + modelDTO.getModelName().toLowerCase() + " (");
 		for (FieldDTO item : modelDTO.getFields()) {
 			createTableQuery.append(item.getFieldName().toLowerCase() + " ");
-			createTableQuery.append(item.getFieldType().toLowerCase() + ", ");
+			createTableQuery.append(item.getFieldType().toLowerCase() + " ");
+			createTableQuery.append(item.getNotNull() != null && item.getNotNull() ? " NOT NULL, " : ", ");
 		}
 		
         createTableQuery.replace(createTableQuery.lastIndexOf(","),createTableQuery.length(), ")");
@@ -46,18 +53,40 @@ public class ModelDAO implements Serializable {
 		query.executeUpdate();
 	}
 	
+	/**
+	 * Return all objects of model
+	 * @param model
+	 * @return List<Object>
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Object> getAll(String model) {
 		String sql = "SELECT * FROM " + model;
 		Query query = entityManager.createNativeQuery(sql);
 		return query.getResultList();
 	}
 	
-	public List<Object> getById(String model, String id) {
+	/**
+	 * Return a object of model
+	 * @param model
+	 * @param id
+	 * @return Object
+	 */
+	public Object getById(String model, String id) {
 		String sql = "SELECT * FROM " + model + " WHERE ID = " + id;
 		Query query = entityManager.createNativeQuery(sql);
-		return query.getResultList();
+		if ( query.getResultList() != null && query.getResultList().size() > 0 ) {
+			return query.getResultList().get(0);
+		} else {
+			return null;
+		}
 	}
 	
+	/**
+	 * Insert a new object.
+	 * @param model
+	 * @param keys
+	 * @param values
+	 */
 	public void addObj(String model, List<String> keys, List<Object> values) {
 		StringBuilder sql = new StringBuilder("INSERT INTO " + model + " (");
 		for (String key : keys) {
@@ -78,6 +107,13 @@ public class ModelDAO implements Serializable {
 		query.executeUpdate();
 	}
 	
+	/**
+	 * Update a object.
+	 * @param model
+	 * @param id
+	 * @param keys
+	 * @param values
+	 */
 	public void updateObj(String model, String id, List<String> keys, List<Object> values) {
 		StringBuilder sql = new StringBuilder("UPDATE " + model + " SET ");
 		for (int i = 0; i < keys.size(); i++) {
@@ -96,6 +132,11 @@ public class ModelDAO implements Serializable {
 		query.executeUpdate();
 	}
 
+	/**
+	 * Remove a object.
+	 * @param model
+	 * @param id
+	 */
 	public void removeObj(String model, String id) {
 		String sql = "DELETE FROM " + model + " WHERE ID = " + id;
 		Query query = entityManager.createNativeQuery(sql);

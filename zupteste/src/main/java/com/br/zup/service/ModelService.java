@@ -15,6 +15,11 @@ import org.codehaus.jettison.json.JSONObject;
 import com.br.zup.dao.ModelDAO;
 import com.br.zup.dto.ModelDTO;
 
+/**
+ * Service of model.
+ * @author adriana.nascimento
+ *
+ */
 @Stateless
 @LocalBean
 public class ModelService {
@@ -22,20 +27,41 @@ public class ModelService {
 	@Inject
 	private ModelDAO modelDAO;
 
+	/**
+	 * Create a new model.
+	 * @param modelDTO
+	 */
 	@Transactional
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void addModel(ModelDTO modelDTO) throws Exception {
 		modelDAO.createNewModel(modelDTO);
 	}
 
+	/**
+	 * Return all objects of model
+	 * @param model
+	 * @return List<Object>
+	 */
 	public List<Object> getAllObjs(String model) throws Exception {
 		return modelDAO.getAll(model);
 	}
 
-	public List<Object> getObjById(String model, String id) throws Exception {
+	/**
+	 * Return a object of model
+	 * @param model
+	 * @param id
+	 * @return Object
+	 */
+	public Object getObjById(String model, String id) throws Exception {
 		return modelDAO.getById(model, id);
 	}
 
+	/**
+	 * Insert a new object.
+	 * @param model
+	 * @param keys
+	 * @param values
+	 */
 	public void addObj(String model, JSONObject json) throws Exception {
 		List<String> keys = new ArrayList<String>();
 		List<Object> values = new ArrayList<Object>();
@@ -48,6 +74,13 @@ public class ModelService {
 		modelDAO.addObj(model, keys, values);
 	}
 	
+	/**
+	 * Update a object.
+	 * @param model
+	 * @param id
+	 * @param keys
+	 * @param values
+	 */
 	public void updateObj(String model, String id, JSONObject json) throws Exception {
 		List<String> keys = new ArrayList<String>();
 		List<Object> values = new ArrayList<Object>();
@@ -60,6 +93,11 @@ public class ModelService {
 		modelDAO.updateObj(model, id, keys, values);
 	}
 
+	/**
+	 * Remove a object.
+	 * @param model
+	 * @param id
+	 */
 	public void removeObj(String model, String id) throws Exception{
 		modelDAO.removeObj(model, id);
 	}

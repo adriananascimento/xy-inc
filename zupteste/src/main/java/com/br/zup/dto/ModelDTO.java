@@ -2,6 +2,11 @@ package com.br.zup.dto;
 
 import java.util.List;
 
+/**
+ * Class to define a model.
+ * @author adriana.nascimento
+ *
+ */
 public class ModelDTO {
 
 	private String modelName;

@@ -20,7 +20,9 @@ import com.br.zup.dto.ModelDTO;
 import com.br.zup.service.ModelService;
 
 /**
- * Controller of model
+ * Controller of model.
+ * @author adriana.nascimento
+ *
  */
 @Path("/")
 @Produces(MediaType.TEXT_PLAIN)
@@ -35,6 +37,12 @@ public class ModelController {
 		return "teste";
 	}
 
+	/**
+	 * REST to add a new Model
+	 * @param modelDTO
+	 * @return Response OK or BAD_REQUEST
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/addNewModel")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -47,6 +55,11 @@ public class ModelController {
 		}
 	}
 
+	/**
+	 * REST to return all objects of model
+	 * @param model
+	 * @return Response OK or BAD_REQUEST with List<Object>
+	 */
 	@Path("/{model}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -59,18 +72,30 @@ public class ModelController {
 		}
 	}
 	
+	/**
+	 * REST to return a object of model
+	 * @param model
+	 * @param id
+	 * @return Response OK or BAD_REQUEST with Object
+	 */
 	@Path("/{model}/{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getObjById(@PathParam("model") String model, @PathParam("id") String id) {
 		try {
-			List<Object> result = modelService.getObjById(model, id);
-			return Response.status(Response.Status.OK).entity(result.get(0)).build();
+			Object result = modelService.getObjById(model, id);
+			return Response.status(Response.Status.OK).entity(result).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 	}
 	
+	/**
+	 * REST to add a object to model
+	 * @param model
+	 * @param json
+	 * @return Response OK or BAD_REQUEST
+	 */
 	@Path("/{model}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -84,6 +109,13 @@ public class ModelController {
 		}
 	}
 	
+	/**
+	 * REST to update a object of model
+	 * @param model
+	 * @param id
+	 * @param json
+	 * @return Response OK or BAD_REQUEST
+	 */
 	@Path("/{model}/{id}")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -97,6 +129,12 @@ public class ModelController {
 		}
 	}
 	
+	/**
+	 * REST to remove a object of model
+	 * @param model
+	 * @param id
+	 * @return Response OK or BAD_REQUEST
+	 */
 	@DELETE
 	@Path("/{model}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)

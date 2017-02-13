@@ -32,6 +32,8 @@
 				<td><input type="text" ng-model="fieldName"/></td>
 				<td>Type</td>
 				<td><select ng-options="item for item in types" ng-model="fieldType"></select></td>
+				<td><input type="checkbox" ng-model="notNull"/></td>
+				<td>Not null?</td>
 				<td><input type="button" value="Add" ng-click="addType()"/></td>
 			</tr>
 		</table>
