@@ -31,12 +31,6 @@ public class ModelController {
 	@Inject
 	private ModelService modelService;
 
-	@GET
-	@Path("/models")
-	public String listModels() throws Exception {
-		return "teste";
-	}
-
 	/**
 	 * REST to add a new Model
 	 * @param modelDTO
@@ -46,7 +40,7 @@ public class ModelController {
 	@POST
 	@Path("/addNewModel")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addNewModel(ModelDTO modelDTO) throws Exception {
+	public Response addNewModel(ModelDTO modelDTO) {
 		try {
 			modelService.addModel(modelDTO);
 			return Response.status(Response.Status.OK).build();

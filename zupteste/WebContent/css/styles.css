@@ -19,3 +19,7 @@
 .tb-align-content {
 	text-align: center;
 }
+
+.required {
+	color: red;
+}

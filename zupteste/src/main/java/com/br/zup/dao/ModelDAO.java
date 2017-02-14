@@ -39,8 +39,9 @@ public class ModelDAO implements Serializable {
 	 * Create a new model.
 	 * @param modelDTO
 	 */
-	public void createNewModel( ModelDTO modelDTO ) {
-		StringBuilder createTableQuery = new StringBuilder("CREATE TABLE IF NOT EXISTS " + modelDTO.getModelName().toLowerCase() + " (");
+	public void createNewModel( ModelDTO modelDTO ) throws Exception {
+		StringBuilder createTableQuery = new StringBuilder("CREATE TABLE " + modelDTO.getModelName().toLowerCase() + " (");
+		createTableQuery.append("id SERIAL, ");
 		for (FieldDTO item : modelDTO.getFields()) {
 			createTableQuery.append(item.getFieldName().toLowerCase() + " ");
 			createTableQuery.append(item.getFieldType().toLowerCase() + " ");

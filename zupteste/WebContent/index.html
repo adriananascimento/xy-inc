@@ -17,12 +17,13 @@
 </head>
 <body ng-controller="Controller" ng-app="app">
 
-	<form ng-submit="addNewModel()">
+	<form ng-submit="addNewModel()" name="modelForm">
 		<h2>Add a new model</h2>
 		<table>
 			<tr>
 				<td>Name</td>
-				<td><input type="text" ng-model="modelName" /></td>
+				<td><input type="text" required ng-model="modelName"/></td>
+				<td class="required">*</td>
 			</tr>
 		</table>
 		<h3>Add fields</h3>
@@ -37,20 +38,25 @@
 				<td><input type="button" value="Add" ng-click="addType()"/></td>
 			</tr>
 		</table>
+		<span>**Don't add a ID field, this will be created automatically.</span>
+		<br/>
 		<br/>
 		<table class="tb-type" ng-if="fields.length > 0">
 			<tr>
 				<th>Name</th>
 				<th>Type</th>
+				<th>Not Null?</th>
 				<th>Action</th>
 			</tr>
 			<tr ng-repeat="field in fields">
 				<td class="tb-default-col">{{ field.fieldName }}</td>
 				<td class="tb-default-col">{{ field.fieldType }}</td>
+				<td class="tb-default-col tb-align-content">{{ field.notNull }}</td>
 				<td class="tb-small-col tb-align-content"><input ng-click="removeField($index)" type="button" value="Remove" /></td>
 			</tr>
 		</table>
 		<span ng-if="fields.length == 0">There are no fields.</span>
+		<br/>
 		<br/>
 		<table>
 			<tr>
