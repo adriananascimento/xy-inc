@@ -54,10 +54,12 @@ DELETE - http://localhost:8080/zupteste/rest/{model}/{id}
 ```
 GET - URL - http://localhost:8080/zupteste/rest/products - Retorna todos os produtos
 RETORNO: Array com todas as informações da tabela 'products'
-
+```
+```
 GET - URL - http://localhost:8080/zupteste/rest/products/1 - Retorna o produto com o id igual a 1
 RETORNO: Item da tabela 'products' com id = 1
-
+```
+```
 POST - URL - http://localhost:8080/zupteste/rest/products - Insere um produto
 JSON: 
 {
@@ -67,7 +69,8 @@ JSON:
   active : true
 }
 RETORNO: STATUS 200 OK
-
+```
+```
 PUT - URL - http://localhost:8080/zupteste/rest/products/1 - Atualiza o produto com o id igual a 1
 JSON: 
 {
@@ -77,7 +80,8 @@ JSON:
   active : true
 }
 RETORNO: STATUS 200 OK
-
+```
+```
 DELETE - URL - http://localhost:8080/zupteste/rest/products/1 - Remove o produto com o id igual a 1
 RETORNO: STATUS 200 OK
 ```
