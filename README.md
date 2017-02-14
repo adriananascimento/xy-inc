@@ -30,8 +30,57 @@ http://localhost:8080/zupteste/
 * Os campos podem ser dos tipos: 'character varying', 'integer', 'numeric' e 'boolean'.
 * É possível informar se o campo não permite valores nulos marcando a opção 'Not null?'.
 * Não é necessário adicionar um campo ID, pois o mesmo será criado automaticamente e as informações inseridas terão IDs sequenciais.
-* Aoós adicionar as informações, é necessário clicar no botão 'Submit' e aguardar que seja exibida a mensagem 'Success!!!' ou 'Error!!!'.
 * Caso nenhum campo seja adicionado, o modelo será criado apenas com o campo ID.
+* Após adicionar as informações, é necessário clicar no botão 'Submit' e aguardar que seja exibida a mensagem 'Success!!!' ou 'Error!!!'.
+* Exemplo de um novo modelo:
+```
+Name: products
+Fields:
+name - character varying - not null
+description - character varying - null
+price - numeric - not null
+active - boolean - not null
+```
+
+* Após a criação do modelo, é possível acessar os serviços REST:
+```
+GET - http://localhost:8080/zupteste/rest/{model}
+GET - http://localhost:8080/zupteste/rest/{model}/{id}
+POST - http://localhost:8080/zupteste/rest/{model}
+PUT - http://localhost:8080/zupteste/rest/{model}/{id}
+DELETE - http://localhost:8080/zupteste/rest/{model}/{id}
+```
+* Exemplo de acesso ao modelo 'products' criado:
+```
+GET - URL - http://localhost:8080/zupteste/rest/products - Retorna todos os produtos
+RETORNO: Array com todas as informações da tabela 'products'
+
+GET - URL - http://localhost:8080/zupteste/rest/products/1 - Retorna o produto com o id igual a 1
+RETORNO: Item da tabela 'products' com id = 1
+
+POST - URL - http://localhost:8080/zupteste/rest/products - Insere um produto
+JSON: 
+{
+  name : 'product 1',
+  description : 'desc product 1',
+  price : 150,
+  active : true
+}
+RETORNO: STATUS 200 OK
+
+PUT - URL - http://localhost:8080/zupteste/rest/products/1 - Atualiza o produto com o id igual a 1
+JSON: 
+{
+  name : 'product 1 atualizado',
+  description : 'desc product 1 atualizado',
+  price : 250,
+  active : true
+}
+RETORNO: STATUS 200 OK
+
+DELETE - URL - http://localhost:8080/zupteste/rest/products/1 - Remove o produto com o id igual a 1
+RETORNO: STATUS 200 OK
+```
 
 ## Informações
 Caso possua algum problema na instalação ou nos testes, por favor, entrar em contato através do e-mail:
