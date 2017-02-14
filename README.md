@@ -10,6 +10,7 @@ Para resolver esse problema, foi implementado um web service REST simples com o 
 Essas instruções irão permitir que você possa rodar a aplicação e realizar os testes localmente. Também é possível baixar o ".war" disponibilidado e instalar em um servidor de aplicação Wildfly remoto, desde que este possua o Datasource configurado.
 
 * Faça download do projeto e importe no [Eclipse](https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/mars2)
+* No Eclipse, execute 'Maven -> Update Project' no projeto, para que todas as dependências do projeto sejam baixadas
 * Adicione no Eclipse o servidor de aplicação [Wildfly](http://download.jboss.org/wildfly/10.1.0.Final/wildfly-10.1.0.Final.zip)
 * Inicie o servidor e adicione o usuário administrador (caso não possua)
 * Na área administrativa do servidor (http://localhost:9990/console/App.html), crie um Datasource com o seguinte JNDI:
