@@ -61,7 +61,7 @@ public class ModelDAO implements Serializable {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Object> getAll(String model) {
-		String sql = "SELECT * FROM " + model;
+		String sql = "SELECT * FROM " + model.toLowerCase();
 		Query query = entityManager.createNativeQuery(sql);
 		return query.getResultList();
 	}
@@ -73,7 +73,7 @@ public class ModelDAO implements Serializable {
 	 * @return Object
 	 */
 	public Object getById(String model, String id) {
-		String sql = "SELECT * FROM " + model + " WHERE ID = " + id;
+		String sql = "SELECT * FROM " + model.toLowerCase() + " WHERE ID = " + id;
 		Query query = entityManager.createNativeQuery(sql);
 		if ( query.getResultList() != null && query.getResultList().size() > 0 ) {
 			return query.getResultList().get(0);
@@ -89,9 +89,9 @@ public class ModelDAO implements Serializable {
 	 * @param values
 	 */
 	public void addObj(String model, List<String> keys, List<Object> values) {
-		StringBuilder sql = new StringBuilder("INSERT INTO " + model + " (");
+		StringBuilder sql = new StringBuilder("INSERT INTO " + model.toLowerCase() + " (");
 		for (String key : keys) {
-			sql.append(key + ", ");
+			sql.append(key.toLowerCase() + ", ");
 		}
 		sql.replace(sql.lastIndexOf(","),sql.length(), ")");
 		sql.append("VALUES (");
@@ -116,9 +116,9 @@ public class ModelDAO implements Serializable {
 	 * @param values
 	 */
 	public void updateObj(String model, String id, List<String> keys, List<Object> values) {
-		StringBuilder sql = new StringBuilder("UPDATE " + model + " SET ");
+		StringBuilder sql = new StringBuilder("UPDATE " + model.toLowerCase() + " SET ");
 		for (int i = 0; i < keys.size(); i++) {
-			sql.append(keys.get(i) + "="); 
+			sql.append(keys.get(i).toLowerCase() + "="); 
 			if (values.get(i) instanceof String ) {
 				sql.append("'" + values.get(i) + "', ");
 			} else {
@@ -139,7 +139,7 @@ public class ModelDAO implements Serializable {
 	 * @param id
 	 */
 	public void removeObj(String model, String id) {
-		String sql = "DELETE FROM " + model + " WHERE ID = " + id;
+		String sql = "DELETE FROM " + model.toLowerCase() + " WHERE ID = " + id;
 		Query query = entityManager.createNativeQuery(sql);
 		query.executeUpdate();
 	}
