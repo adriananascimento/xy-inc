@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+
+.tb-type {
+    border-collapse: collapse;
+}
+
+.tb-type th, .tb-type td {
+	border: 1px solid #000;
+}
+
+.tb-default-col {
+	width: 20%;
+}
+
+.tb-small-col {
+	width: 10%;
+}
+
+.tb-align-content {
+	text-align: center;
+}
+
+.required {
+	color: red;
+}
